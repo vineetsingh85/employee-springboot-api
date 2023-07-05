@@ -6,6 +6,7 @@ import com.company.employee.employeespringbootapi.exception.ErrorDetails;
 import com.company.employee.employeespringbootapi.exception.UserNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -36,12 +37,11 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     }
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(),
                 ex.getFieldError().getDefaultMessage(), request.getDescription(false));
 
-        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
-    }
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);    }
 
 
 }
