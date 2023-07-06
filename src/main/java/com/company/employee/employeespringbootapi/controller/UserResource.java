@@ -17,7 +17,6 @@ import java.util.List;
 @AllArgsConstructor
 public class UserResource {
 
-    @Autowired
     private UserDaoService userDaoService;
 
     @GetMapping("/users")
@@ -55,4 +54,6 @@ public class UserResource {
     public void deleteUser(@PathVariable Integer id) {
         userDaoService.deleteUserById(id);
     }
+
+
 }
